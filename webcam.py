@@ -44,7 +44,7 @@ while True:
     
     coord, color = get_plate(img)
 
-    if len(coord) != 0:
+    if len(coord):
         h, w, c = img.shape
         x = coord[0].pts
         start_point = (int(w*min(x[0])), int(h*min(x[1])))
@@ -54,4 +54,8 @@ while True:
         plt.imshow(img)
  
     cv2.imshow("output",img)
-    cv2.waitKey(1)
+    if cv2.waitKey(20) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
