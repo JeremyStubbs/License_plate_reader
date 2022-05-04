@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from keras_utils import detect_lp
 from os.path import splitext,basename
 from keras.models import model_from_json
-import glob
 from utils import im2single
 from label import Shape, writeShapes
 
@@ -21,13 +20,13 @@ def load_model(path):
     except Exception as e:
         print(e)
 
-wpod_net_path = "wpod-net.json"
+wpod_net_path = "wpod-net"
 wpod_net = load_model(wpod_net_path)
 
 lp_threshold=0.5
 
-def get_plate(image_path, Dmax=608, Dmin=256):
-    Ivehicle = image_path
+def get_plate(webcam_image, Dmax=608, Dmin=256):
+    Ivehicle = webcam_image
     ratio = float(max(Ivehicle.shape[:2]))/min(Ivehicle.shape[:2])
     side  = int(ratio*288.)
     bound_dim = min(side + (side%(2**4)),608)
@@ -50,7 +49,7 @@ while True:
         end_point = (int(w*max(x[0])),  int(h*max(x[1])))
 
         cv2.rectangle(img, start_point, end_point, color = (0,255,0), thickness=2)
-        plt.imshow(img)
+        # plt.imshow(img)
  
     cv2.imshow("output",img)
     if cv2.waitKey(20) & 0xFF == ord('q'):
