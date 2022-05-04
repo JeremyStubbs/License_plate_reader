@@ -49,7 +49,6 @@ while True:
         end_point = (int(w*max(x[0])),  int(h*max(x[1])))
 
         cv2.rectangle(img, start_point, end_point, color = (0,255,0), thickness=2)
-        # plt.imshow(img)
  
     cv2.imshow("output",img)
     if cv2.waitKey(20) & 0xFF == ord('q'):
