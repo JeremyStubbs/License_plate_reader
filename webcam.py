@@ -40,7 +40,7 @@ cap = cv2.VideoCapture(0)
 while True:
     success,img = cap.read()
     
-    coord, color = get_plate(img)
+    coord, cropped_plate = get_plate(img)
 
     if len(coord):
         h, w, c = img.shape
